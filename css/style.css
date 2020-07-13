@@ -1,0 +1,64 @@
+body {
+    height: 500vw;
+    font-family: 'Apple SD Gothic Neo', 'Roboto', 'Noto Sans KR', NanumGothic, 'Malgun Gothic', sans-serif;
+    -webkit-overflow-scrolling: touch;
+    color: rgb(26, 13, 59);
+    background: #6deafa;
+}
+
+.world {
+    position: fixed;/*스크롤 올라가도 그대로*/
+    left :0;
+    top : 0;
+    width: 100vw;
+    height: 100vh;
+    perspective: 1000px;/*3차원*/
+}
+.stage {
+    /*캐릭터와 정면판을 하나로 묶어줄 클래스*/
+    position: absolute;
+    left :0;
+    top : 0;
+    width: 100vw;
+    height: 100vh;
+    transform-style: preserve-3d; 
+    /*world의 3d가 자녀클래스까지 3d 효과가 전달되도록
+    크롭,사파리(맥),모바일은 webkit인데, explore는 지원 잘..
+    */
+}
+.house {
+    /*기본값은 브라우저의 꽉찬상태이고,
+    Z축으로 작아지게 할예정*/
+    width: 100vw;
+    height: 100vh;
+    transform :translateZ(-490vw);
+    transform-style: preserve-3d;
+}
+.wall {
+    position: absolute;
+    left :0;
+    top : 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(255, 255, 255, 0.8);
+}
+.wall-left {
+    /* left : -500vw; */
+    width : 1000vw;
+    transform : rotateY(90deg) translateZ(-500vw);
+}
+.wall-right {
+    /* left : -500vw; */
+    width : 1000vw;
+    /* transform : rotateY(90deg) translateZ(100vw); */
+    transform : rotateY(90deg) translateZ(-400vw);
+}
+.wall-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+.wall-title {
+    font-size: 3rem;
+}
