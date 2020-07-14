@@ -2,9 +2,14 @@
     //전역변수 사용을 피하기 위해
     //house를 움직이자
     const houseElem = document.querySelector('.house');
+    
     //전체문서 높이 - 창높이 = 스크롤할수 있는 높이
-    let maxScrollValue = document.body.offsetHeight - window.innerHeight;
+    let maxScrollValue;
 
+    //창사이즈가 바뀌면 maxScrollValue를 갱신해서 계산한다.
+    function resizeHandler() {
+        maxScrollValue = document.body.offsetHeight - window.innerHeight;
+    }
     window.addEventListener('scroll', function(){
         console.log(pageYOffset);        
         console.log(maxScrollValue);
@@ -17,4 +22,8 @@
         const zMove = pageYOffset/maxScrollValue * 980 - 490;        
         houseElem.style.transform = 'translateZ(' + zMove + 'vw)';
     });
+
+    //창사이즈가 달라질때마다 resizeHandler호출
+    window.addEventListener('resize', resizeHandler);
+    resizeHandler();
 })();
