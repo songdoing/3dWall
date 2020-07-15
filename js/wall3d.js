@@ -3,7 +3,9 @@
     //house를 움직이자
     const houseElem = document.querySelector('.house');
     const barElem = document.querySelector('.progress-bar');
-   
+    const mousePos = {x:0, y:0};
+    //벽들과 캐릭터들이 마우스무브에 따라 움직이기 위해 stage를 이용
+    const stageElem = document.querySelector('.stage');
     
     //전체문서 높이 - 창높이 = 스크롤할수 있는 높이
     let maxScrollValue;
@@ -29,7 +31,17 @@
         barElem.style.width = scrollPer * 100 + '%';
     });
 
-   
+    window.addEventListener('mousemove', function(e){
+        console.log(e.clientX, e.clientY);
+        //화면의 가운데점을 {0,0}으로 하고 왼쪽 x:-1 오른쪽 x:1 위쪽 y:1 아래 y:-1
+        //엄청 자주쓰는 수식이다.
+        mousePos.x = -1 + (e.clientX / window.innerWidth) *2;
+        mousePos.y = 1 - (e.clientY / window.innerHeight) *2;
+
+        //stageElem.style.transform = 'rotateX(0deg) rotateY(0deg)';
+        //가로축을 기준으로 rotate되는 거니..mousePos.y와 관련
+        stageElem.style.transform = 'rotateX(' + (mousePos.y *5) + 'deg) rotateY(' + (mousePos.x *5) +'deg)';
+    });
 
     //창사이즈가 달라질때마다 resizeHandler호출
     window.addEventListener('resize', resizeHandler);
