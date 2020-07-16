@@ -45,10 +45,21 @@
 
     //창사이즈가 달라질때마다 resizeHandler호출
     window.addEventListener('resize', resizeHandler);
+
+    //stage를 클릭했을때 생성자 함수를 호출해서 캐릭터를 생기게 한다. 
+    stageElem.addEventListener('click', function(e){
+        //css파일의 left값에 clientX 값을 넣어주면 클릭한 점의 x좌표에 캐릭터
+        console.log(e.clientX);
+        //%값으로 만들기
+        //e.clientX / window.innerWidth * 100
+        //생성자 함수, 객체형식으로 입력(여러값넣을꺼라서)
+        new Character({
+            xPos : e.clientX / window.innerWidth * 100
+        });
+    });
     //최초 한번은 호출
     resizeHandler();
 
-    //생성자 함수
-    new Character();
+    
     
 })();

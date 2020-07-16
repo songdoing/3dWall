@@ -1,4 +1,5 @@
-function Character(){
+//생성자함수의 인자로 객체를 받는다 xPos
+function Character(info){
     this.mainElem = document.createElement('div');
     this.mainElem.classList.add('character');
     this.mainElem.innerHTML = ''
@@ -28,4 +29,5 @@ function Character(){
         + '</div>'; 
 
     document.querySelector('.stage').appendChild(this.mainElem);
+    this.mainElem.style.left = info.xPos + '%';
 }
