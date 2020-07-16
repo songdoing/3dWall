@@ -1,3 +1,6 @@
+@keyframes ani-head {
+    to { transform : rotateX(-10deg);}
+}
 body {
     height: 500vw; /*스크롤이 생기도록 5배 늘려준다*/
     font-family: 'Apple SD Gothic Neo', 'Roboto', 'Noto Sans KR', NanumGothic, 'Malgun Gothic', sans-serif;
@@ -129,6 +132,8 @@ body {
     height: calc(648 / 1334 * 100%);
     transform-origin: center bottom; /*transform를 할때 기준점 (기본값은 x, y = center center) */
     animation: ani-head 0.6s infinite alternate cubic-bezier(0.46, 0.18, 0.66, 0.93);
+    /*cubic-bezier는 가속도..부드럽게하기위해
+    개발자모드를 켜서 s곡선을 조정하면 숫자들이 나온다*/
 }
 .character-head-face.face-front { background-image: url('../images/ilbuni_head_front.png'); }
 .character-head-face.face-back { background-image: url('../images/ilbuni_head_back.png'); }
