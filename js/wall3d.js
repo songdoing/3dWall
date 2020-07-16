@@ -47,4 +47,8 @@
     window.addEventListener('resize', resizeHandler);
     //최초 한번은 호출
     resizeHandler();
+
+    //생성자 함수
+    new Character();
+    
 })();
