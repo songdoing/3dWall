@@ -1,6 +1,22 @@
 @keyframes ani-head {
     to { transform : rotateX(-10deg);}
 }
+@keyframes ani-running-leg {
+    from {
+        transform : rotateX(-30deg);
+    }
+    to {
+        transform : rotateX(30deg);
+    }
+}
+@keyframes ani-running-arm {
+    from {
+        transform : rotateY(30deg);
+    }
+    to {
+        transform : rotateY(-30deg);
+    }
+}
 body {
     height: 500vw; /*스크롤이 생기도록 5배 늘려준다*/
     font-family: 'Apple SD Gothic Neo', 'Roboto', 'Noto Sans KR', NanumGothic, 'Malgun Gothic', sans-serif;
@@ -186,6 +202,7 @@ body {
 .character.running .character-leg-right { animation: ani-running-leg 0.2s alternate infinite linear; }
 .character.running .character-leg-left { animation: ani-running-leg 0.2s alternate-reverse infinite linear; }
 .character.running .character-arm { animation: ani-running-arm 0.2s alternate infinite linear; }
+/*linear 등속도*/
 
 /*라면소녀*/
 body[data-char='ragirl'] .character {
