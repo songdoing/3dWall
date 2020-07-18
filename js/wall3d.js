@@ -54,7 +54,9 @@
         //e.clientX / window.innerWidth * 100
         //생성자 함수, 객체형식으로 입력(여러값넣을꺼라서)
         new Character({
-            xPos : e.clientX / window.innerWidth * 100
+            xPos : e.clientX / window.innerWidth * 100,
+            speed : Math.random() * 0.5 + 0.2
+            //캐릭터 생성시 random으로 0~1 사이가 speed나옴
         });
     });
     //최초 한번은 호출

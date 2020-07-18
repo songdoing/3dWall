@@ -38,7 +38,7 @@ function Character(info){
     //info의 xPos값을 document의 속성으로도 넣어줌
     this.xPos = info.xPos;
     //캐릭터 이동 속도(좌우)
-    this.speed = 0.1;
+    this.speed = info.speed;
     //캐릭터 좌우이동 방향
     this.direction;
     //좌우 이동 중인지 아닌지
@@ -123,6 +123,20 @@ Character.prototype = {
                 //오른쪽키
                 self.direction = 'right';
                 self.mainElem.setAttribute('data-direction', 'right');
+                self.mainElem.classList.add('running');
+                self.run(self);
+                self.runningState = true;
+            } else if (e.keycode == 38) {
+                //위로
+                self.direction = 'backward';
+                self.mainElem.setAttribute('data-direction', 'backward');
+                self.mainElem.classList.add('running');
+                self.run(self);
+                self.runningState = true;
+            } else if (e.keycode == 40) {
+                //아래로키
+                self.direction = 'forward';
+                self.mainElem.setAttribute('data-direction', 'forward');
                 self.mainElem.classList.add('running');
                 self.run(self);
                 self.runningState = true;
