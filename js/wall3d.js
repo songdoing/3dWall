@@ -15,10 +15,10 @@
         maxScrollValue = document.body.offsetHeight - window.innerHeight;
     }
     window.addEventListener('scroll', function(){
-        console.log(pageYOffset);        
-        console.log(maxScrollValue);
+        //console.log(pageYOffset);        
+        //console.log(maxScrollValue);
         //스크롤을 얼마나 했는지 비율
-        console.log(pageYOffset/maxScrollValue);
+        //console.log(pageYOffset/maxScrollValue);
 
         //house를 translateZ로 -490해줘서 hello벽이 뒤로 물러나 있었고,
         //스크롤했을때, 0부터 시작이 아닌, -490빼주고 시작하도록
@@ -32,7 +32,7 @@
     });
 
     window.addEventListener('mousemove', function(e){
-        console.log(e.clientX, e.clientY);
+        //console.log(e.clientX, e.clientY);
         //화면의 가운데점을 {0,0}으로 하고 왼쪽 x:-1 오른쪽 x:1 위쪽 y:1 아래 y:-1
         //엄청 자주쓰는 수식이다.
         mousePos.x = -1 + (e.clientX / window.innerWidth) *2;
@@ -49,7 +49,7 @@
     //stage를 클릭했을때 생성자 함수를 호출해서 캐릭터를 생기게 한다. 
     stageElem.addEventListener('click', function(e){
         //css파일의 left값에 clientX 값을 넣어주면 클릭한 점의 x좌표에 캐릭터
-        console.log(e.clientX);
+        //console.log(e.clientX);
         //%값으로 만들기
         //e.clientX / window.innerWidth * 100
         //생성자 함수, 객체형식으로 입력(여러값넣을꺼라서)

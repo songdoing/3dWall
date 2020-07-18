@@ -1,6 +1,6 @@
 //생성자함수의 인자로 객체를 받는다 xPos
 function Character(info){
-    console.log(this);
+   // console.log(this); //Character
     this.mainElem = document.createElement('div');
     this.mainElem.classList.add('character');
     this.mainElem.innerHTML = ''
@@ -31,6 +31,8 @@ function Character(info){
 
     document.querySelector('.stage').appendChild(this.mainElem);
     this.mainElem.style.left = info.xPos + '%';
+    //scroll중인지 아닌지 상태확인
+    this.scrollState = false;
     this.init();
 }
 /*
@@ -50,12 +52,30 @@ Character.prototype = {
 Character.prototype = {
     constructor : Character,
     init : function() {
-        console.log(this); // Character
+       // console.log(this); // Character
         const self = this;
         window.addEventListener('scroll', function(){
-            console.log(this); //window객체
+            //setTimeout함수를 취소하는 함수
+            clearTimeout(self.scrollState);
+
+            //console.log(this); //window객체
             //this.mainElem.classList.add('running'); 에러
-            self.mainElem.classList.add('running');
+            //초기값은 false이니 한번 실행
+            //스크롤멈춤 0.5s후에 숫자리턴해서 더이상 실행안됨
+            if(!self.scrollState) {
+                self.mainElem.classList.add('running');
+            }
+
+            //setTimeout함수는 숫자를 리턴해줌
+            self.scrollState = setTimeout(function(){
+                //0.5초후에 실행이 될텐데, 계속 clearTimeout때문에
+                //실행이 안 되다가, 스크롤멈추는 마지막 순간에
+                //비로소 실행이 됨.
+                //console.log(self.scrollState); 스크롤멈춤 0.5s후에 숫자 리턴
+                self.scrollState = false;
+                self.mainElem.classList.remove('running');
+            }, 500);
+            
         });
     }
 };
