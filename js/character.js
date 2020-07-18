@@ -33,9 +33,20 @@ function Character(info){
     this.mainElem.style.left = info.xPos + '%';
     //scroll중인지 아닌지 상태확인
     this.scrollState = false;
-    this.init();
     //마지막 스크롤 위치
-    this.lastScrollTop;
+    this.lastScrollTop = 0;
+    //info의 xPos값을 document의 속성으로도 넣어줌
+    this.xPos = info.xPos;
+    //캐릭터 이동 속도(좌우)
+    this.speed = 0.1;
+    //캐릭터 좌우이동 방향
+    this.direction;
+    //좌우 이동 중인지 아닌지
+    this.runningState = false;
+    //requestAnimationFrame이 return하는 숫자
+    this.rafId;
+    this.init();
+    
 }
 /*
 Character.prototype.xxxx = function(){
@@ -56,6 +67,7 @@ Character.prototype = {
     init : function() {
        // console.log(this); // Character
         const self = this;
+
         window.addEventListener('scroll', function(){
             //setTimeout함수를 취소하는 함수
             clearTimeout(self.scrollState);
@@ -88,5 +100,60 @@ Character.prototype = {
             }
             self.lastScrollTop = pageYOffset;
         });
+
+        //keycode.info 에 보면 keyboard마다 숫자가 부여됨
+        window.addEventListener('keydown', function(e){
+            //console.log(e.keyCode);
+            //keydown를 연타하면 계속 중첩되어 속도가 빨라진다.
+            if (self.runningState) return;
+
+            if(e.keyCode == 37) {
+                //왼쪽키 누른거임
+                self.direction = 'left';
+                self.mainElem.setAttribute('data-direction', 'left');
+                self.mainElem.classList.add('running');
+                //keydown에 의존해서 xPos를 바꾸니, 부자연스럽..느릿
+                //requestAnimationFrame사용할것
+                //self.xPos -= self.speed;
+                //self.mainElem.style.left = self.xPos + '%';
+                self.run(self);
+                //키를 계속 눌러도 true로 바뀌어 return종료
+                self.runningState = true;
+            } else if (e.keyCode == 39) {
+                //오른쪽키
+                self.direction = 'right';
+                self.mainElem.setAttribute('data-direction', 'right');
+                self.mainElem.classList.add('running');
+                self.run(self);
+                self.runningState = true;
+            }
+        });
+
+        //key를 떼었을때
+        window.addEventListener('keyup', function(e){
+            self.mainElem.classList.remove('running');
+            //requestAnimationFrame를 취소해야 좌우버튼를 떼면 캐릭터 멈춤
+            cancelAnimationFrame(self.rafId);
+        });
+    },
+    run : function(self){ 
+        //run 메소드 안에서도 this 쓰려면..
+        //const self = this; 를 하는데
+        //this가 Character를 가르키다가 
+        //context가 바뀌어(requestAnimationFrame때메) window를 가르키게 되어 오류
+        if(self.direction == 'left') {
+            self.xPos -= self.speed;
+        } else if (self.direction == 'right') {
+            self.xPos += self.speed;
+        }
+        self.mainElem.style.left = self.xPos + '%';
+
+        //requestAnimationFrame(self.run);
+        //그냥 호출하지 말고, self를 인자로 넣어서 호출한다.
+        //self.rafId에는 requestAnimationFrame이 리턴한 숫자
+        self.rafId = requestAnimationFrame(function(){
+            self.run(self);
+        });
     }
+
 };
