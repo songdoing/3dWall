@@ -3,6 +3,7 @@
     //house를 움직이자
     const houseElem = document.querySelector('.house');
     const barElem = document.querySelector('.progress-bar');
+    const selectCharacterElem = document.querySelector('.select-character');
     const mousePos = {x:0, y:0};
     //벽들과 캐릭터들이 마우스무브에 따라 움직이기 위해 stage를 이용
     const stageElem = document.querySelector('.stage');
@@ -59,6 +60,13 @@
             //캐릭터 생성시 random으로 0~1 사이가 speed나옴
         });
     });
+
+    selectCharacterElem.addEventListener('click' , function(e){
+        //console.log(e.target.getAttribute('data-char')); 클릭하는 일분이,라걸
+        const value = e.target.getAttribute('data-char');
+        document.body.setAttribute('data-char', value);
+    });
+
     //최초 한번은 호출
     resizeHandler();
 
