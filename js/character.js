@@ -134,6 +134,8 @@ Character.prototype = {
             self.mainElem.classList.remove('running');
             //requestAnimationFrame를 취소해야 좌우버튼를 떼면 캐릭터 멈춤
             cancelAnimationFrame(self.rafId);
+            //그러나 다시 버튼 눌렀을때, self.runningState가 true여서 실행안됨
+            self.runningState = false;
         });
     },
     run : function(self){ 
@@ -146,6 +148,15 @@ Character.prototype = {
         } else if (self.direction == 'right') {
             self.xPos += self.speed;
         }
+
+        //캐릭터가 벽을 뚫고 나가지 않도록,,x포지션을 읽어 범위안에서만
+        if(self.xPos < 2) {
+            self.xPos = 2;
+        }
+        if(self.xPos > 88) {
+            self.xPos = 88;
+        }          
+        
         self.mainElem.style.left = self.xPos + '%';
 
         //requestAnimationFrame(self.run);
