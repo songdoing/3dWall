@@ -8,7 +8,7 @@ Also the characters can walk sideways depending arrow keys.
 * CSS(animation, transform)
 
 ## Sample
-https://songdoing.github.io/3dWall/
+<a href="https://songdoing.github.io/3dWall/"> Click Here </a>
 
 ## Screenshot
 <img src="https://user-images.githubusercontent.com/48890162/88126877-7963a200-cba0-11ea-820d-917887a1d0af.png">
